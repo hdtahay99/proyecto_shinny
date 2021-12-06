@@ -5,6 +5,7 @@ library(dplyr)
 library(DT)
 
 
+
 ui <- dashboardPage(
     title = 'Historical Stock Data by Company', skin = 'purple',
     dashboardHeader(title = "Historical Stock Data by Company", titleWidth = 335),
@@ -17,10 +18,9 @@ ui <- dashboardPage(
         "readme",
         tabName = "readme",
         icon = icon("dashboard")),
-    uiOutput("output_range_age"),
-    uiOutput("output_list_gender"),
-    uiOutput("output_list_number_prods"),
-    uiOutput("output_list_country")
+    uiOutput("output_range_year"),
+    uiOutput("output_list_type"),
+    uiOutput("output_list_common_name")
 )),
 
 
@@ -44,31 +44,36 @@ ui <- dashboardPage(
                                     valueBoxOutput("Avarage"),
                                     valueBoxOutput("Data"),
                                     box(
-                                        title = "Stock",
+                                        title = "Density",
+                                        status = "primary",
+                                        solidHeader = TRUE,
+                                        plotOutput("render_plot3", height = "250px")
+                                    ),
+                                    box(
+                                        title = "Behavior",
+                                        status = "primary",
+                                        solidHeader = TRUE,
+                                        plotOutput("render_plot4", height = "250px")
+                                    ),
+                                    box(
+                                        title = "Volume",
                                         status = "primary",
                                         solidHeader = TRUE,
                                         plotOutput("render_plot", height = "250px", brush = 'mbrush')
                                     ),
-                                    box(
-                                        title = "Location",
-                                        status = "primary",
-                                        solidHeader = TRUE,
-                                        plotOutput("render_box_plot", height = "250px")
-                                    ),
-                                    box(
-                                        title = "Best",
-                                        status = "primary",
-                                        background = "blue",
-                                        solidHeader = TRUE,
-                                        DT::dataTableOutput('table_output', height = "120px")
-                                    ),
-                                    
+
                                     box(
                                         title = "Data",
                                         status = "primary",
                                         solidHeader = TRUE,
                                         verbatimTextOutput("urlText"),
-                                        height="180px"
+                                        height="250px"
+                                    ),
+                                    box(
+                                        title = "Data",
+                                        status = "primary",
+                                        solidHeader = TRUE,
+                                        DT::dataTableOutput('table_output', height = "120px")
                                     )
                                 )
                        ),

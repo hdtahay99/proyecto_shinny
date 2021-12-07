@@ -3,6 +3,8 @@ require(shinydashboard)
 library(ggplot2)
 library(dplyr)
 library(DT)
+library(leaflet)
+library(googleway)
 
 
 
@@ -37,7 +39,7 @@ ui <- dashboardPage(
         tabItem(tabName = "dashboard",
         tabsetPanel(
             fluidRow(
-                tabBox(id = "tabset1", height = "650px", width=12, title = "My Box Size",  ## change box size here
+                tabBox(id = "tabset1", height = "650px", width=12, title = "Dashboard",  ## change box size here
                        tabPanel("Data",
                                 fluidRow(
                                     valueBoxOutput("Companies"),
@@ -45,39 +47,46 @@ ui <- dashboardPage(
                                     valueBoxOutput("Data"),
                                     box(
                                         title = "Density",
-                                        status = "primary",
+                                        status = "success",
                                         solidHeader = TRUE,
                                         plotOutput("render_plot3", height = "250px")
                                     ),
                                     box(
                                         title = "Behavior",
-                                        status = "primary",
+                                        status = "success",
                                         solidHeader = TRUE,
                                         plotOutput("render_plot4", height = "250px")
                                     ),
                                     box(
                                         title = "Volume",
-                                        status = "primary",
+                                        status = "success",
                                         solidHeader = TRUE,
-                                        plotOutput("render_plot", height = "250px", brush = 'mbrush')
+                                        plotOutput("render_plot", height = "250px",
+                                                   brush = 'mouse_brush')
                                     ),
 
                                     box(
-                                        title = "Data",
-                                        status = "primary",
+                                        title = "Brush Data",
+                                        status = "success",
                                         solidHeader = TRUE,
-                                        verbatimTextOutput("urlText"),
-                                        height="250px"
-                                    ),
-                                    box(
-                                        title = "Data",
-                                        status = "primary",
-                                        solidHeader = TRUE,
-                                        DT::dataTableOutput('table_output', height = "120px")
+                                        DT::dataTableOutput('table_output', height = "250px")
                                     )
                                 )
                        ),
-                       tabPanel("Map")
+                       tabPanel("URL Parameters",
+                                fluidRow(
+                                    box(
+                                        title = "URL Components",
+                                        status = "success",
+                                        solidHeader = TRUE,
+                                        verbatimTextOutput("urlText"),
+                                        height="250px",
+                                        width=12
+                                ))),
+                       
+                       tabPanel("Map",
+                                fluidRow(leafletOutput("mmap", height = "700px")
+                                    ))
                 ))))
     )))
 

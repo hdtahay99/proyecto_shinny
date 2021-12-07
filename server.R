@@ -8,7 +8,7 @@ click_output <- NULL
 
 
 server <- function(input, output, session) {
-  plot1 <- qplot(rnorm(500),fill=I("red"),binwidth=0.2,title="plotgraph1")
+  plot1 <- qplot(rnorm(500),fill=I("red"),binwidth=0.2,title="plotg")
   output$plot<-renderPlot({plot1})
     
     output$output_range_year <- renderUI({
@@ -164,14 +164,10 @@ server <- function(input, output, session) {
         
         output$urlText <- renderText({
             paste(
-                sep = "",
-                "protocol: ",
+                "URL Components: ",
                 session$clientData$url_protocol,
-                "\n",
-                "hostname: ",
                 session$clientData$url_hostname,
-                "\n",
-                "search: ",
+                session$clientData$url_pathname,
                 queryString,
                 "\n"
             )
@@ -213,10 +209,10 @@ server <- function(input, output, session) {
         }
       }
       
-      if (!is.null(input$mbrush)) {
+      if (!is.null(input$mouse_brush)) {
         df <-
           brushedPoints(graficado,
-                        input$mbrush,
+                        input$mouse_brush,
                         xvar = 'Year',
                         yvar = 'Volume')
         out <- df %>%
@@ -263,5 +259,14 @@ server <- function(input, output, session) {
                aes(x = Year , y = Volume))  +
         geom_point(aes(colour = factor(common_name))) +
         labs(colour = "common_name")
+    })
+    
+    output$mmap <- renderLeaflet({
+      leaflet() %>%
+        addTiles(
+          urlTemplate = "//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        ) %>%
+        addMarkers(data = ploteo(), lng = ~hq_aprox_location_lon,
+                   lat = ~hq_aprox_location_lat)
     })
 }

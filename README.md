@@ -8,4 +8,4 @@ Integrantes
 
 #### **shiniapps.io** 
 
-* [shinyapps.io](https://estuardozapeta.shinyapps.io/Fase2/)
+* [shinyapps.io](https://tesquivel.shinyapps.io/Proyecto_Shiny/)

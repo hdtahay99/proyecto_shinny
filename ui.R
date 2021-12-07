@@ -30,9 +30,9 @@ ui <- dashboardPage(
         tabItems(
             tabItem(tabName = "readme",
                     fluidPage(
-                        tags$iframe(src = './readme.html', 
-                                    width = '100%', height = '800px', 
-                                    frameborder = 0, scrolling = 'auto'
+                        titlePanel("Included Content"),
+                        mainPanel(
+                            includeHTML("readme.html")
                         )
                     )
             ),

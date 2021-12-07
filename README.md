@@ -5,3 +5,7 @@ Integrantes
 * Heansell Diosymar Tahay Menchú 20005256
 * Edi Antonio Ordoñez Hernández 9912628
 * Tomás Ernesto Esquivel Ramos 21004407
+
+#### **shiniapps.io** 
+
+* [shinyapps.io](https://estuardozapeta.shinyapps.io/Fase2/)

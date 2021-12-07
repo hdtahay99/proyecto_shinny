@@ -1,4 +1,4 @@
-# proyecto 1 Shinnyapp
+# Proyecto 1 Shinnyapp
 
 ### Integrantes
 * Ramón Alberto Escobar Madrid 21001346

@@ -93,7 +93,8 @@ server <- function(input, output, session) {
         
         total_Volume <-
           dataset %>% filter(Year >= selected_range[1] &
-                               Year <= selected_range[2]) %>% filter(common_name == selected_common_name) %>% summarise(value = sum(Volume), .groups = 'drop')
+                               Year <= selected_range[2]) %>% filter(common_name == selected_common_name) %>% 
+                                                              summarise(value = sum(Volume), .groups = 'drop')
         total_Volume <- total_Volume$value
         count_data <-
           dataset %>% filter(Year >= selected_range[1] &
@@ -109,12 +110,13 @@ server <- function(input, output, session) {
         total_Volume <-
           dataset %>% filter(type %in% checked_type) %>% filter(Year >=
                                                                           selected_range[1] &
-                                                                          Year <= selected_range[2]) %>% filter(common_name == selected_common_name) %>% summarise(value = sum(Volume), .groups = 'drop')
+                                                                          Year <= selected_range[2]) %>% 
+                                                                          filter(common_name == selected_common_name) %>% summarise(value = sum(Volume), .groups = 'drop')
         count_data <-
           dataset %>% filter(type %in% checked_type) %>% filter(Year >=
                                                                           selected_range[1] &
-                                                                          Year <= selected_range[2]) %>% filter(common_name == selected_common_name) %>% nrow()
-        
+                                                                          Year <= selected_range[2]) %>% 
+                                                                          filter(common_name == selected_common_name) %>% nrow()
         
       }
         
@@ -124,13 +126,9 @@ server <- function(input, output, session) {
         
         output$Companies <- renderValueBox({
             valueBox(
-
-                formatC(count_company , format = "d", big.mark = ',')
-                ,
-                paste('Total Companies')
-                ,
-                icon = icon("share-alt", lib = 'glyphicon')
-                ,
+                formatC(count_company , format = "d", big.mark = ','),
+                paste('Total Companies'),
+                icon = icon("share-alt", lib = 'glyphicon'),
                 color = "red"
             )
             
@@ -138,12 +136,9 @@ server <- function(input, output, session) {
         
         output$Avarage <- renderValueBox({
             valueBox(
-                prettyNum(total_Volume , big.mark = ',')
-                ,
-                'Volume'
-                ,
-                icon = icon("usd", lib = 'glyphicon')
-                ,
+                prettyNum(total_Volume , big.mark = ','),
+                'Volume',
+                icon = icon("usd", lib = 'glyphicon'),
                 color = "green"
             )
             
@@ -151,12 +146,9 @@ server <- function(input, output, session) {
         
         output$Data <- renderValueBox({
             valueBox(
-                formatC(count_data, format = "d", big.mark = ',')
-                ,
-                paste('Data')
-                ,
-                icon = icon("ok", lib = 'glyphicon')
-                ,
+                formatC(count_data, format = "d", big.mark = ','),
+                paste('Data'),
+                icon = icon("ok", lib = 'glyphicon'),
                 color = "purple"
             )
             
@@ -192,7 +184,8 @@ server <- function(input, output, session) {
           !is.null(selected_common_name)) {
         graficado <-
           dataset %>% filter(type %in% checked_type) %>% filter(Year >= selected_range[1] &
-                                                                          Year <= selected_range[2]) %>% filter(common_name == selected_common_name)
+                                                                          Year <= selected_range[2]) %>% 
+                                                                          filter(common_name == selected_common_name)
       }
       else{
         if (is.null(checked_type) &
@@ -200,7 +193,8 @@ server <- function(input, output, session) {
             !is.null(selected_common_name)) {
           graficado <-
             dataset  %>% filter(Year >= selected_range[1] &
-                                  Year <= selected_range[2]) %>% filter(common_name == selected_common_name)
+                                  Year <= selected_range[2]) %>% 
+                                  filter(common_name == selected_common_name)
         }
         else{
           graficado <-
